@@ -2,13 +2,24 @@ package xyz.martyanov.chess
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.runtime.*
-import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
-@Preview
-fun ChessBoard(fen: String = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1") {
+fun ChessBoard(
+    initialPosition: Array<String?> = defaultBoardPosition()
+) {
     Box {
         Background()
-        PiecesLayer(fen)
+        PiecesLayer(initialPosition)
     }
 }
+
+private fun defaultBoardPosition(): Array<String?> = arrayOf(
+    "bR", "bN", "bB", "bQ", "bK", "bB", "bN", "bR",
+    "bP", "bP", "bP", "bP", "bP", "bP", "bP", "bP",
+    null, null, null, null, null, null, null, null,
+    null, null, null, null, null, null, null, null,
+    null, null, null, null, null, null, null, null,
+    null, null, null, null, null, null, null, null,
+    "wP", "wP", "wP", "wP", "wP", "wP", "wP", "wP",
+    "wR", "wN", "wB", "wQ", "wK", "wB", "wN", "wR"
+)
