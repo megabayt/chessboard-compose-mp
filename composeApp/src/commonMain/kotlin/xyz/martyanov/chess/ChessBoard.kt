@@ -7,9 +7,20 @@ import androidx.compose.runtime.*
 fun ChessBoard(
     initialPosition: Array<String?> = defaultBoardPosition()
 ) {
+    var board by remember { mutableStateOf(initialPosition.copyOf()) }
+
     Box {
         Background()
-        PiecesLayer(initialPosition)
+        PiecesLayer(board)
+        InteractiveLayer(
+            board = board,
+            onPieceMoved = { fromIndex, toIndex ->
+                val newBoard = board.copyOf()
+                newBoard[toIndex] = newBoard[fromIndex]
+                newBoard[fromIndex] = null
+                board = newBoard
+            }
+        )
     }
 }
 
